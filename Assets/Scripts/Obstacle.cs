@@ -27,18 +27,18 @@ public class Obstacle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _rb.GetComponent<Rigidbody>();
+        if (_rb == null) _rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(_isGameOver)
         {
             _rb.linearVelocity = Vector3.zero;
             return;
         }
-        _rb.AddForce(Vector3.left * Time.deltaTime * _speed);
+        _rb.AddForce(Vector3.left * _speed);
     }
 
     private void OnGameOver(bool gameOver)
